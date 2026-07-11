@@ -1,0 +1,20 @@
+import pytesseract
+from PIL import Image
+print("===== OCR Image to Text Reader =====")
+while True:
+    filename = input("\nEnter image file name (or 'exit'): ").strip()
+    if filename.lower() == "exit":
+        print("Goodbye!")
+        break
+    try:
+        image = Image.open(filename)
+        text = pytesseract.image_to_string(image)
+        print("\n===== Extracted Text =====")
+        if text.strip():
+            print(text)
+        else:
+            print("No text detected.")
+    except FileNotFoundError:
+        print("Image file not found.")
+    except Exception as e:
+        print("Error:", e)
